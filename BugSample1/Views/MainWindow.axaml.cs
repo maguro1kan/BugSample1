@@ -20,7 +20,7 @@ namespace BugSample1.Views
         private async void Check_OnClick(object? sender, RoutedEventArgs e)
         {
             string id = string.Empty;
-            await Dispatcher.UIThread.InvokeAsync(() => { id = ((Button)sender).Name; }, DispatcherPriority.Background);
+            await Dispatcher.UIThread.InvokeAsync(() => { id = ((Button)sender).Tag.ToString(); }, DispatcherPriority.Background);
             Debug.Print(id);
             AddLog($"Clicked: {id}");
         }
