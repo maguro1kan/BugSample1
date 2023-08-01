@@ -1,0 +1,44 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:BugSample2.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="450"
+        Width="450" Height="450"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        x:Class="BugSample2.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="BugSample2">
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <DockPanel>
+        <StackPanel HorizontalAlignment="Center">
+            <TextBlock 
+                Margin="0 100 0 0"
+                Text="Choose item some times"/>
+			<ComboBox
+                Margin="0 20 0 0"
+                Width="150" MaxDropDownHeight="300"
+                ItemsSource="{Binding Lists}"
+                SelectedItem="{Binding SelectedItem}">
+                <Interaction.Behaviors>
+                    <EventTriggerBehavior EventName="SelectionChanged">
+                        <InvokeCommandAction Command="{Binding Path=SelectionChanged}" />
+                    </EventTriggerBehavior>
+                </Interaction.Behaviors>
+            </ComboBox>
+            <StackPanel Orientation="Horizontal"
+                        Margin="0 100 0 0">
+                <TextBlock Text="Your selected:"/>
+                <TextBlock Text="{Binding AfterSelectItem}"/>
+            </StackPanel>
+		</StackPanel>
+    </DockPanel>
+
+</Window>
